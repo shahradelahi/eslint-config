@@ -8,8 +8,12 @@ on:
     branches: [ main ]
   pull_request:
 
+concurrency:
+  group: '${{ github.workflow }}-${{ github.event.number || github.sha }}'
+  cancel-in-progress: true
+
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,17 +23,23 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [ 22.x ]
 
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-      - run: npx semantic-release
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm dlx semantic-release --branches main
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
