@@ -1,0 +1,45 @@
+{
+  "name": "@shahrad/eslint-config",
+  "version": "0.0.0",
+  "description": "My personal eslint config for eslint, typescript",
+  "author": "Shahrad Elahi <shahrad@litehex.com> (https://github.com/shahradelahi)",
+  "license": "MIT",
+  "repository": "github:shahradelahi/eslint-config",
+  "homepage": "https://github.com/shahradelahi/eslint-config#readme",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "packageManager": "pnpm@9.14.2",
+  "scripts": {
+    "dev": "pnpm build -- --watch",
+    "build": "tsup index.ts --format esm,cjs --dts-resolve --minify",
+    "clean": "git clean -xdf node_modules",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint && pnpm typecheck",
+    "prepublishOnly": "pnpm lint && pnpm build"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.16.0",
+    "eslint": "^9.16.0",
+    "typescript-eslint": "^8.16.0"
+  },
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "^7.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
