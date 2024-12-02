@@ -1,6 +1,6 @@
 {
   "name": "@shahrad/eslint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "My personal eslint config for eslint, typescript",
   "author": "Shahrad Elahi <shahrad@litehex.com> (https://github.com/shahradelahi)",
   "license": "MIT",
