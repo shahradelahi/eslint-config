@@ -18,7 +18,7 @@
   "files": [
     "dist"
   ],
-  "packageManager": "pnpm@9.14.2",
+  "packageManager": "pnpm@10.15.0",
   "scripts": {
     "dev": "pnpm build -- --watch",
     "build": "tsup index.ts --format esm,cjs --dts-resolve --minify",
@@ -28,14 +28,14 @@
     "prepublishOnly": "pnpm build && pnpm lint"
   },
   "dependencies": {
-    "@eslint/js": "^9.16.0",
-    "eslint": "^9.16.0",
-    "typescript-eslint": "^8.16.0"
+    "@eslint/js": "^9.34.0",
+    "eslint": "^9.34.0",
+    "typescript-eslint": "^8.41.0"
   },
   "devDependencies": {
-    "@sindresorhus/tsconfig": "^7.0.0",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "@shahrad/tsconfig": "^1.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2"
   },
   "private": false,
   "publishConfig": {
