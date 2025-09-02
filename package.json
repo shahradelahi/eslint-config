@@ -18,7 +18,7 @@
   "files": [
     "dist"
   ],
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "scripts": {
     "dev": "pnpm build -- --watch",
     "build": "tsup index.ts --format esm,cjs --dts-resolve --minify",
