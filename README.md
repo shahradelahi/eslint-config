@@ -17,7 +17,7 @@ import { defineConfig } from '@shahrad/eslint-config';
 export default defineConfig(
   { ignores: ['dist/**'] },
   // more configs
-)
+);
 ```
 
 ## License

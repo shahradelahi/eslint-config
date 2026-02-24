@@ -7,39 +7,52 @@
   "repository": "github:shahradelahi/eslint-config",
   "homepage": "https://github.com/shahradelahi/eslint-config#readme",
   "type": "module",
-  "main": "dist/index.cjs",
-  "types": "dist",
+  "engines": {
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+  },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.cjs"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/**",
+    "!**/*.d.cts"
   ],
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.30.2+sha512.36cdc707e7b7940a988c9c1ecf88d084f8514b5c3f085f53a2e244c2921d3b2545bc20dd4ebe1fc245feec463bb298aecea7a63ed1f7680b877dc6379d8d0cb4",
   "scripts": {
-    "dev": "pnpm build -- --watch",
+    "dev": "pnpm build --watch",
     "build": "tsup index.ts --format esm,cjs --dts-resolve --minify",
-    "clean": "git clean -xdf node_modules",
+    "clean": "git clean -xdf \"**/node_modules/**\" dist .tsbuildinfo",
     "typecheck": "tsc --noEmit",
     "lint": "eslint && pnpm typecheck",
     "prepublishOnly": "pnpm build && pnpm lint"
   },
   "dependencies": {
-    "@eslint/js": "^9.34.0",
-    "eslint": "^9.34.0",
-    "typescript-eslint": "^8.41.0"
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/utils": "^8.56.0",
+    "typescript-eslint": "^8.56.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@shahrad/tsconfig": "^1.2.0",
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
+    "eslint": "^10.0.1",
+    "semantic-release": "^24.2.6",
+    "tsup": "^8.5.1"
   },
   "private": false,
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0 || ^10.0.0",
+    "typescript": ">=5.0.0"
   }
 }
