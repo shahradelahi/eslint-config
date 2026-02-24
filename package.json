@@ -30,7 +30,7 @@
     "build": "tsup index.ts --format esm,cjs --dts-resolve --minify",
     "clean": "git clean -xdf \"**/node_modules/**\" dist .tsbuildinfo",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint && pnpm typecheck",
+    "lint": "pnpm build && eslint . && pnpm typecheck",
     "prepublishOnly": "pnpm build && pnpm lint"
   },
   "dependencies": {

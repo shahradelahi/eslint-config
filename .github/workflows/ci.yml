@@ -4,41 +4,50 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch: # Allows manual triggering of the release
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.event.number || github.sha }}'
   cancel-in-progress: true
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
-    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+
+  release:
+    needs: test
+    # Only run release if manually triggered or if specifically desired on push
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       issues: write
       pull-requests: write
       id-token: write
 
-    strategy:
-      matrix:
-        node-version: [22.x]
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22.x
           cache: 'pnpm'
-
       - run: pnpm install --frozen-lockfile
-
       - run: pnpm semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
