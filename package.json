@@ -39,7 +39,7 @@
     "typescript-eslint": "^8.56.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/git": "^10.0.1",
     "@shahrad/tsconfig": "^1.2.0",
     "eslint": "^10.0.1",
